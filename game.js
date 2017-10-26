@@ -25,10 +25,9 @@ $(document).ready(function () {
 
     function startGame() {
         //make sure there is text
-        if ($("#x").val().length === 0 && $("#o").val().length === 0) {
+        if ($("#x").val().length === 0 || $("#o").val().length === 0) {
             return;
         }
-
         played = [];
         isWinner = false;
         playerX = [];
@@ -36,25 +35,20 @@ $(document).ready(function () {
         playerXName = "";
         playerOName = "";
         playerXTurn = true;
-
         //delete text on board
         $(".square").text("");
-
         //assigns players to variables
         playerXName = $("#x").val();
         playerOName = $("#o").val();
-
         //close modal
         $("#myModal").modal("hide");
         //change text to display names
         $(".playerX").text(playerXName);
         $(".playerO").text(playerOName);
-
         if (win.length != 8) {
             //create board
             createBoard();
         }
-
         $(".playerXDiv p").css("visibility", "visible");
         $(".playerODiv p").css("visibility", "hidden");
 
@@ -93,7 +87,6 @@ $(document).ready(function () {
         var targetNumber = parseInt(target);
         console.log(targetNumber);
         var player = null;
-
         var currentPlayer = null;
         if (playerXTurn) {
             currentPlayer = playerX;
@@ -101,9 +94,7 @@ $(document).ready(function () {
         } else {
             currentPlayer = playerO;
             player = playerOName;
-
         }
-
         //check to see if square is already occupied
         if (!played.includes(targetNumber)) {
             //if not, add to array of picked options and what has already  been played
@@ -119,11 +110,9 @@ $(document).ready(function () {
                 $(".playerODiv p").css("visibility", "hidden");
                 $(".playerXDiv p").css("visibility", "visible");
             }
-
             //check if has winning combinations
             if (currentPlayer.length >= 3) {
                 if (played.length > 8) {
-
                     newGame();
                     return;
                 }
@@ -131,15 +120,11 @@ $(document).ready(function () {
                     isWinner = true;
                     $("#myModal").find(".modal-title").text("Congratulations " + player + ", you win!");
                     $("#myModal").modal("show");
-
-
                 }
             }
-
             //next players turn
             playerXTurn = !playerXTurn;
         }
-
     }
 
     // // // ##checks current players list to see if it contains winning arrangements
